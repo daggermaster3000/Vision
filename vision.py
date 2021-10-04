@@ -38,6 +38,7 @@ for filename in os.listdir(directory):
         #Process image for damaged area
         image = cv2.imread(os.path.join(directory, filename))
         original = image.copy()
+        image2 = image.copy()
         image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         lower = np.array(lf_damage, dtype="uint8")
         upper = np.array(hf_damage, dtype="uint8")
@@ -69,16 +70,17 @@ for filename in os.listdir(directory):
         #process image for total area
         
         
-        original_tot = image.copy()
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        original_tot = image2.copy()
+        image = cv2.cvtColor(image2, cv2.COLOR_BGR2HSV)
         lower = np.array(lf_total, dtype="uint8")
         upper = np.array(hf_total, dtype="uint8")
         mask_tot = cv2.inRange(image, lower, upper)
      
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
         opening = cv2.morphologyEx(mask_tot, cv2.MORPH_OPEN, kernel, iterations=1)
-     
+        #chainapproxsimple is faster than the none...
         cnts = cv2.findContours(opening, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        #just to check not necessary
         cnts = cnts[0] if len(cnts) == 2 else cnts[1]
      
         area = 0
