@@ -22,7 +22,7 @@ lf_total = [0, 0, 0]
 hf_total = [254, 254, 254]
 
 prefix_dic = {
-        "buffer":"buffer",
+        "Buffer":"buffer",
         "Ffibp":"FFIBP",
         "FfIBP":"FFIBP",
         "FfiBP+RiAFP":"RI+FF-4",
