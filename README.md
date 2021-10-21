@@ -6,13 +6,13 @@
 
 
 
-<!-- PROJECT LOGO -->
+<!-- PROJECT LOGO
 <br />
 <div align="center">
   <a href="Paul_Bettany_as_Vision.jpg">
     <img src="Paul_Bettany_as_Vision.jpg" alt="Logo" width="120" height="120">
   </a>
-
+-->
 <h3 align="center">VISION</h3>
 
   <p align="center">
