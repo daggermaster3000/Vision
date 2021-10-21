@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Sep 14 11:29:50 2021
-Code to analyse colored samples
+Code to analyse a ratio between two colored areas, initially used to determine damage ratio done to leaves highlighted by trypan blue staining
+
 @author: daggermaster3000
 """
 
@@ -11,16 +12,17 @@ import numpy as np
 import csv
 
 header = ['name','ratio','treat']
-log = []
-directory = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/input-data4/crop'#input
-path = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/output-data4'#output
+log = []                #temporary for csv output
+directory = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/input-data4/crop'      #input path
+path = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/output-data4'               #output path
 
 #filter values
-lf_damage = [0, 75, 0]
+lf_damage = [0, 75, 0]                  #thresholds for damaged area
 hf_damage = [179, 255, 255]
-lf_total = [0, 0, 0]
+lf_total = [0, 0, 0]                    #thresholds for total area
 hf_total = [254, 254, 254]
 
+# Prefix dictionary that will check in the file name the type of sample and output it in the csv
 prefix_dic = {
         "Buffer":"buffer",
         "Ffibp":"FFIBP",
@@ -29,6 +31,7 @@ prefix_dic = {
         "RiAFP":"RIAFP"
         }
 
+#Get files (png or jpg)
 
 for filename in os.listdir(directory):
     
@@ -57,16 +60,8 @@ for filename in os.listdir(directory):
      
         print(damaged_area)
         
-        
-        '''
-        cv2.imshow('mask', mask)
-        cv2.imshow('original', original)
-        cv2.imshow('opening', opening)
-        
-        '''
-        
 
-        
+           
         #process image for total area
         
         
@@ -103,7 +98,7 @@ for filename in os.listdir(directory):
 
 
 
-        #write to log
+        #write to temporary log for csv output
         for i in prefix_dic.keys():
             if filename.startswith(i):
                 log.append([filename,(np.round(damaged_area/area,2))*100,str(prefix_dic[i])])    
@@ -111,7 +106,8 @@ for filename in os.listdir(directory):
     else:
         continue
 
-    #output log file
+    #output the temp file as csv
+
 with open('C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/output-data4/data.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
