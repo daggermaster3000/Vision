@@ -13,8 +13,8 @@ import csv
 
 header = ['name','ratio','treat']
 log = []                #temporary for csv output
-directory = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/input-data4/crop'      #input path
-path = 'C:/Users/BIC-Mobility/Documents/Quillan/iGem/VISION/output-data4'               #output path
+directory = 'C:/Users/input'      #input path
+path = 'C:/Users/output'               #output path
 
 #filter values
 lf_damage = [0, 75, 0]                  #thresholds for damaged area
